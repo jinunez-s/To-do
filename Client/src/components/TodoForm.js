@@ -1,4 +1,3 @@
-// import React, { useState, useEffect, useRef } from "react";
 import React, { useState, useRef } from "react";
 import { BsArrowDown, BsPlusCircleFill } from "react-icons/bs";
 import { RiCheckboxCircleLine } from "react-icons/ri";
@@ -6,7 +5,6 @@ import { RiCheckboxCircleLine } from "react-icons/ri";
 function TodoForm(props) {
   const [input, setInput] = useState(props.edit ? props.edit.value : "");
   const [showDescription, setShowDescription] = useState(false);
-  //const [is_done, setIsDone] = useState(props.edit ? props.edit.is_done : 0);
   const [description, setDescription] = useState(
     props.edit ? props.edit.description : ""
   );

@@ -8,7 +8,6 @@ const apiUrl = "http://localhost:3000/to-dos";
 
 function TodoList() {
   const [todos, setTodos] = useState([]);
-
   const getTodos = () => {
     axios.get(apiUrl).then( (res) => {
       setTodos(res.data);
@@ -18,19 +17,6 @@ function TodoList() {
   useEffect( ()=> {
     getTodos();
   }, []);
-
-  // useEffect(() => {
-  //   axios.get(apiUrl).then((res) => {
-  //     setTodos(res.data.todos);
-  //   });
-  // }, []);
-
-  // useEffect(() => {
-  //   axios.get(apiUrl).then((res) => {
-  //     setTodos(res.data.todos);
-  //   });
-  // }, [setTodos]);
-
   const addTodo = (todo) => {
     if (!todo.title || /^\s*$/.test(todo.title)) {
       return;
@@ -46,7 +32,6 @@ function TodoList() {
       console.error(error);
     }
   };
-
   const showDescription = (todoId) => {
     let updatedTodos = todos.map((todo) => {
       if (todo.id === todoId) {
@@ -56,7 +41,6 @@ function TodoList() {
     });
     setTodos(updatedTodos);
   };
-
   const updateTodo = (todoId, newValue) => {
     newValue.is_done=newValue.isDone;
     console.log(newValue);
@@ -71,39 +55,10 @@ function TodoList() {
             prev.map((item) => (item.id === todoId ? newValue : item))
             )
         );
-      // axios({
-      //   method: "patch",
-      //   url: `${apiUrl}`,
-      //   params: {
-      //     id: `${todoId}`,
-      //   },
-      //   data: newValue,
-      // });
-      // setTodos((prev) =>
-      //   prev.map((item) => (item.id === todoId ? newValue : item))
-      // );
     } catch (error) {
       console.error(error);
     }
   };
-
-  // const removeTodo = (id) => {
-  //   try {
-  //     axios({
-  //       method: "delete",
-  //       url: `${apiUrl}`,
-  //       params: {
-  //         id: `${id}`,
-  //       },
-  //     });
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
-
-  //   const removedArr = [...todos].filter((todo) => todo.id !== id);
-
-  //   setTodos(removedArr);
-  // };
     const removeTodo = (id) => {
       axios
         .delete(`${apiUrl}/${id}`, {})
@@ -112,31 +67,6 @@ function TodoList() {
           setTodos(removedArr);
         });
     };
-
-  // const completeTodo = (id) => {
-  //   try {
-  //     let updateTodo = todos.find((todo) => todo.id === id);
-
-  //     axios({
-  //       method: "patch",
-  //       url: `${apiUrl}`,
-  //       params: {
-  //         id: `${id}`,
-  //       },
-  //       data: {
-  //         title: `${updateTodo.title}`,
-  //         description: `${updateTodo.description}`,
-  //         isDone: `${updateTodo.is_done === 1 ? 0 : 1}`,
-  //       },
-  //     });
-
-  //     setTodos((prev) =>
-  //       prev.map((todo) => (todo.id === id ? updateTodo : todo))
-  //     );
-  //   } catch (error) {
-  //     console.error(error);
-  //   }
-  // };
     const completeTodo = (id) => {
       
       let updatedTodos = todos.map((todo) => {
@@ -147,7 +77,6 @@ function TodoList() {
       });
       setTodos(updatedTodos);
     };
-
   return (
     <>
       <h1>What's the Plan for Today?</h1>
