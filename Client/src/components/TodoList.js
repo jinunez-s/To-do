@@ -4,7 +4,7 @@ import TodoForm from "./TodoForm";
 import Todo from "./Todo";
 import { useEffect } from "react";
 
-const apiUrl = "http://localhost:3000/to-dos";
+const apiUrl = "http://localhost:3001/to-dos";
 
 function TodoList() {
   const [todos, setTodos] = useState([]);
