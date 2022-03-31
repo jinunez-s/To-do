@@ -58,23 +58,30 @@ function TodoList() {
   };
 
   const updateTodo = (todoId, newValue) => {
+    newValue.is_done=newValue.isDone;
     console.log(newValue);
     if (!newValue.title || /^\s*$/.test(newValue.title)) {
       return;
     }
-
     try {
-      axios({
-        method: "patch",
-        url: `${apiUrl}`,
-        params: {
-          id: `${todoId}`,
-        },
-        data: newValue,
-      });
-      setTodos((prev) =>
-        prev.map((item) => (item.id === todoId ? newValue : item))
-      );
+      axios
+        .patch(`${apiUrl}/${todoId}`, newValue)
+        .then(
+          setTodos((prev) =>
+            prev.map((item) => (item.id === todoId ? newValue : item))
+            )
+        );
+      // axios({
+      //   method: "patch",
+      //   url: `${apiUrl}`,
+      //   params: {
+      //     id: `${todoId}`,
+      //   },
+      //   data: newValue,
+      // });
+      // setTodos((prev) =>
+      //   prev.map((item) => (item.id === todoId ? newValue : item))
+      // );
     } catch (error) {
       console.error(error);
     }
@@ -97,7 +104,6 @@ function TodoList() {
 
   //   setTodos(removedArr);
   // };
-
     const removeTodo = (id) => {
       axios
         .delete(`${apiUrl}/${id}`, {})
